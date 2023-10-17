@@ -1,28 +1,40 @@
-function get(req, res) {
-    res.status(200).send({
-        mensagem: `Usando GET dentro da rota de usuários`
-    })
+const User = require('../Models/UserModel')
+
+async function get(req, res) {
+    const users = await User.findAll();
+    res.json(users);
 }
 
-function getById(req, res) {
-    const { id } = req.body;
-
-    res.status(200).send({
-        mensagem: `OK, deu certo id = ${id}`
-    });
+async function getById(req, res) {
+    const user = await User.findByPk(req.params.id);
+    res.json(user);
 }
 
-function post(req, res) {
-
+async function post(req, res) {
+    const user = await User.create(req.body);
+    res.json(user);
 }
 
-function put(req, res) {
-
+async function put(req, res) {
+    const user = await User.findByPk(req.params.id);
+    if (user) {
+        await user.update(req.body);
+        res.json(user);
+    } else {
+        res.status(404).json({ message: 'User not found' });
+    }
 }
 
-function delet(req, res) {
-
+async function delet(req, res) {
+    const user = await User.findByPk(req.params.id);
+    if (user) {
+        await user.destroy();
+        res.json({ message: 'User deleted' });
+    } else {
+        res.status(404).json({ message: 'User not found' });
+    }
 }
+
 module.exports = {
     get,
     getById,

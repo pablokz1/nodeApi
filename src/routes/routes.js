@@ -6,11 +6,11 @@ const category = require('../controller/CategoryController');
 const score = require('../controller/ScoreController');
 const routes = express();
 
-routes.get('/user', user.get);
-routes.get('/user/:id', user.getById);
-routes.post('/user', user.post);
-routes.put('/user/:id', user.put);
-routes.delete('/user/:id', user.delet);
+routes.get('/users', user.get);
+routes.get('/users/:id', user.getById);
+routes.post('/users', user.post);
+routes.put('/users/:id', user.put);
+routes.delete('/users/:id', user.delet);
 
 routes.get('/games', games.get);
 routes.get('/games/:id', games.getById);
