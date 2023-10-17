@@ -8,7 +8,7 @@ const sequelize = new Sequelize({
 class Plataform extends Model {}
 Plataform.init({
   name: DataTypes.STRING
-}, { sequelize, modelName: 'Plataform' });
+}, { sequelize, modelName: 'plataform' });
 
 sequelize.sync();
 
