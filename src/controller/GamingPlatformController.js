@@ -1,24 +1,40 @@
-function get(req, res) {
-    res.status(200).send({
-        mensagem: `Usando GET dentro da rota de plataforma de jogos`
-    })
+const Plataform = require('../Models/PlataformModel')
+
+async function get(req, res) {
+    const users = await Plataform.findAll();
+    res.json(users);
 }
 
-function getById(req, res) {
-
+async function getById(req, res) {
+    const user = await Plataform.findByPk(req.params.id);
+    res.json(user);
 }
 
-function post(req, res) {
-
+async function post(req, res) {
+    const user = await Plataform.create(req.body);
+    res.json(user);
 }
 
-function put(req, res) {
-
+async function put(req, res) {
+    const user = await Plataform.findByPk(req.params.id);
+    if (user) {
+        await user.update(req.body);
+        res.json(user);
+    } else {
+        res.status(404).json({ message: 'Gaming Plataform not found' });
+    }
 }
 
-function delet(req, res) {
-
+async function delet(req, res) {
+    const user = await Plataform.findByPk(req.params.id);
+    if (user) {
+        await user.destroy();
+        res.json({ message: 'Gaming Plataform  deleted' });
+    } else {
+        res.status(404).json({ message: 'Gaming Plataform  not found' });
+    }
 }
+
 module.exports = {
     get,
     getById,
