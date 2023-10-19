@@ -1,19 +1,29 @@
-const { Sequelize, Model, DataTypes } = require('sequelize');
-
-const sequelize = new Sequelize({
-    dialect: 'sqlite',
-    storage: './database.sqlite'
-});
+const { Model, DataTypes } = require('sequelize');
+const sequelize = require('../config/database');
 
 class User extends Model {}
-User.init({
-  name: DataTypes.STRING,
-  email: DataTypes.STRING,
-  dateOfBirth: DataTypes.STRING,
-  password: DataTypes.STRING,
-  confirmPassword: DataTypes.STRING,
-}, { sequelize, modelName: 'user' });
 
-sequelize.sync();
+User.init({
+  name: {
+    type: DataTypes.STRING
+  },
+  email: {
+    type: DataTypes.STRING
+  },
+  dateOfBirth: {
+    type: DataTypes.STRING
+  },
+  password: {
+    type: DataTypes.STRING
+  },
+  confirmPassword: {
+    type: DataTypes.STRING
+  },
+}, { 
+  sequelize, 
+  modelName: 'User',
+  tableName: 'users',
+  timestamps: false
+});
 
 module.exports = User;

@@ -1,17 +1,17 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 
-class Plataform extends Model {}
+class Category extends Model {}
 
-Plataform.init({
+Category.init({
   name: {
     type: DataTypes.STRING
   }
 }, { 
   sequelize, 
-  modelName: 'Plataform',
-  tableName: 'plataforms',
+  modelName: 'Category',
+  tableName: 'categories',
   timestamps: false
 });
 
-module.exports = Plataform;
+module.exports = Category;
