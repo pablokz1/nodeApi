@@ -24,7 +24,7 @@ Game.init({
   timestamps: false
 });
 
-Game.belongsToMany(Category, {through: 'categories_games'});
-Category.belongsToMany(Game, {through: 'categories_games'});
+Game.belongsToMany(Category, {through: 'categories_games', timestamps: false});
+Category.belongsToMany(Game, {through: 'categories_games', timestamps: false});
 
 module.exports = Game;

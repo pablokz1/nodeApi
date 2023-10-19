@@ -1,5 +1,6 @@
 const Category = require('../Models/CategoryModel');
 const Game = require('../Models/GameModel');
+const CategoryGame = require('../Models/CategoryGame');
 
 async function get(req, res) {
     const games = await Game.findAll({include: Category});
@@ -12,15 +13,24 @@ async function getById(req, res) {
 }
 
 async function post(req, res) { 
-    const game = await Game.create(req.body, {include: Category});
-    res.json(game);
+    const categoryId = req.body.categories[0].id;
+    const game = await Game.create(req.body);
+    const category = await Category.findByPk(categoryId);
+    await CategoryGame.create({GameId: game.id, CategoryId: category.id})
+    res.json(await Game.findByPk(game.id, {include: Category}));
 }
 
 async function put(req, res) {
-    const game = await Game.findByPk(req.params.id);
+    const game = await Game.findByPk(req.params.id, {include: Category});
     if (game) {
         await game.update(req.body);
-        res.json(game);
+        const categoryId = req.body.categories[0].id;
+        const categoriaExistente = game.Categories.find(c => c.id == categoryId);
+        if(categoriaExistente == null){
+            const category = await Category.findByPk(categoryId);
+            await CategoryGame.create({GameId: game.id, CategoryId: category.id})
+        }
+        res.json(await Game.findByPk(game.id, {include: Category}));
     } else {
         res.status(404).json({ message: 'Game not found' });
     }
