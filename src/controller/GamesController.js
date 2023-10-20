@@ -1,6 +1,7 @@
 const Category = require('../Models/CategoryModel');
 const Game = require('../Models/GameModel');
-const CategoryGame = require('../Models/CategoryGame');
+const CategoryGame = require('../Models/CategoryGameModel');
+const Plataform = require('../Models/PlataformModel');
 
 async function get(req, res) {
     const games = await Game.findAll({include: Category});

@@ -1,34 +1,34 @@
 const Plataform = require('../Models/PlataformModel')
 
 async function get(req, res) {
-    const users = await Plataform.findAll();
-    res.json(users);
+    const plataforms = await Plataform.findAll();
+    res.json(plataforms);
 }
 
 async function getById(req, res) {
-    const user = await Plataform.findByPk(req.params.id);
-    res.json(user);
+    const paltaform = await Plataform.findByPk(req.params.id);
+    res.json(paltaform);
 }
 
 async function post(req, res) {
-    const user = await Plataform.create(req.body);
-    res.json(user);
+    const paltaform = await Plataform.create(req.body);
+    res.json(paltaform);
 }
 
 async function put(req, res) {
-    const user = await Plataform.findByPk(req.params.id);
-    if (user) {
-        await user.update(req.body);
-        res.json(user);
+    const paltaform = await Plataform.findByPk(req.params.id);
+    if (paltaform) {
+        await paltaform.update(req.body);
+        res.json(paltaform);
     } else {
         res.status(404).json({ message: 'Gaming Plataform not found' });
     }
 }
 
 async function delet(req, res) {
-    const user = await Plataform.findByPk(req.params.id);
-    if (user) {
-        await user.destroy();
+    const paltaform = await Plataform.findByPk(req.params.id);
+    if (paltaform) {
+        await paltaform.destroy();
         res.json({ message: 'Gaming Plataform  deleted' });
     } else {
         res.status(404).json({ message: 'Gaming Plataform  not found' });

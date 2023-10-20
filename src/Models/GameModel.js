@@ -2,6 +2,7 @@ const { Model, DataTypes, Deferrable } = require('sequelize');
 const sequelize = require('../config/database');
 const Plataform = require('./PlataformModel');
 const Category = require('./CategoryModel');
+const Score = require('./ScoreModel');
 
 class Game extends Model {}
 

@@ -1,24 +1,40 @@
-function get(req, res) {
-    res.status(200).send({
-        mensagem: `Usando GET dentro da rota de score`
-    })
+const Score = require('../Models/ScoreModel');
+
+async function get(req, res) {
+    const scores = await Score.findAll();
+    res.json(scores);
 }
 
-function getById(req, res) {
-
+async function getById(req, res) {
+    const score = await Score.findByPk(req.params.id);
+    res.json(score);
 }
 
-function post(req, res) {
-
+async function post(req, res) {
+    const score = await Score.create(req.body);
+    res.json(score);
 }
 
-function put(req, res) {
-
+async function put(req, res) {
+    const score = await Score.findByPk(req.params.id);
+    if (score) {
+        await score.update(req.body);
+        res.json(score);
+    } else {
+        res.status(404).json({ message: 'Score not found' });
+    }
 }
 
-function delet(req, res) {
-
+async function delet(req, res) {
+    const score = await Score.findByPk(req.params.id);
+    if (score) {
+        await score.destroy();
+        res.json({ message: 'Score deleted' });
+    } else {
+        res.status(404).json({ message: 'Score  not found' });
+    }
 }
+
 module.exports = {
     get,
     getById,
