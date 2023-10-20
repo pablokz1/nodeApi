@@ -25,10 +25,10 @@ async function put(req, res) {
     if (game) {
         await game.update(req.body);
         const categoryId = req.body.categories[0].id;
-        const categoriaExistente = game.Categories.find(c => c.id == categoryId);
-        if(categoriaExistente == null){
+        const existingCategory = game.Categories.find(c => c.id == categoryId);
+        if(existingCategory == null){
             const category = await Category.findByPk(categoryId);
-            await CategoryGame.create({GameId: game.id, CategoryId: category.id})
+            await CategoryGame.create({GameId: game.id, CategoryId: category.id});
         }
         res.json(await Game.findByPk(game.id, {include: Category}));
     } else {
