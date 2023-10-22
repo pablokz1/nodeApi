@@ -15,10 +15,7 @@ User.init({
   },
   password: {
     type: DataTypes.STRING
-  },
-  confirmPassword: {
-    type: DataTypes.STRING
-  },
+  }
 }, { 
   sequelize, 
   modelName: 'User',
